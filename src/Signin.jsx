@@ -1,11 +1,21 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import {toast, ToastContainer} from 'react-toastify';
 
 const Signin = () => {
 
-    const navgate = useNavigate();
+    const navigate = useNavigate();
+    const [email, setEmail]= useState();
+     const [password, setPassword]= useState();
+
+     const handleSubmit= async ()=>{
+        if(!email || !password){
+            toast.success("Please enter the details")
+        }else{
+            navigate('/tracking')
+        }
+     }
+
   
 
   return (
@@ -18,20 +28,24 @@ const Signin = () => {
                           <input
                               placeholder="type here"
                               className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary"
-                              type="text"
+                              name="email"
+                              value={email}
+                              onChange={(e)=>setEmail(e.target.value)}
+                              type="email"
                               required
                           />
                       </div>
                       
                       <div className="w-full ">
                           <p>Password</p>
-                          <input  placeholder="type here" className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" type="password" required />
+                          <input  name="password"  value={password}  onChange={(e)=>setPassword(e.target.value)} placeholder="type here" className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" type="password" required />
                       </div>                    
                   
-                     <button className=" text-black w-full py-2 rounded-md cursor-pointer border border-indigo-500"  onClick={()=> navgate('/tracking')}>
+                     <button className=" text-black w-full py-2 rounded-md cursor-pointer border border-indigo-500"  onClick={handleSubmit}>
                           Login
                       </button>
                   </form>
+                  <ToastContainer/>
     </div>
   )
 }

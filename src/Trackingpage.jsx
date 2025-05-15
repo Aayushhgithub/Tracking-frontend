@@ -43,15 +43,15 @@ const Trackingpage = () => {
 useEffect(()=>{
 
 socket.on("server-location-send",(data)=>{
-  console.log("data", data);
+  console.log("remotepostion", data);
   setremotePosition([data.latitude,data.longitude])
   
 })
 },[])
 
   return (
-    <div >
-      <h2 className='tittle'>Realtime Tracking Device</h2>
+    <div className='mt-10'>
+      <h2 className='text-xl text-center font-semibold mb-10'>Realtime Tracking Device</h2>
              <MapContainer center={position} zoom={13} style={{ height: '500px', width: '100vw' }}>
             <TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker icon={ICON} position={position}>
